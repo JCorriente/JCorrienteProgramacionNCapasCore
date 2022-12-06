@@ -1,0 +1,7 @@
+Nombre|ApellidoPaterno|ApellidoMaterno|FechaNacimiento|Genero|Email|Pass|Tele|Cel|CURP|User|Rol|Calle|NumeroInterior|NumeroExterior|IdColonia
+Mariana|Ponce|Flores|2000-01-02|M|pedro@gmail.com|019ie8|5577992233|5511224499|PONCE988JUU3|pedro|1|NULL|Benito|113|188|12
+Ana|Arteaga|Ramirez|2000-01-02|F|ana@gmail.com|h777dd|5577994400|5511225566|ARTEP988JUU3|ana|2||NULLFrancisco|155|109|11
+Hanna|Cote|Flores|2000-01-02|F|hanna@gmail.com|98dudbdh|5577991011|5511220011|COTE98988JUU3|hanna|3|NULL|Periferico|122|199|17
+David|Ramirez|Fernadez|2000-01-02|M|david@gmail.com|988d99d|5577994400|5511225557|RAMI23988JUU3|david|3|NULL|Westeros|155|188|14
+Josefina|Vazquez|Mota|2000-01-02|F|josefina@gmail.com|87y77gd|5577991122|5511226666|VAZQ8988JUU3|josefina|2|NULL|One wall|123|155|15
+Estefany|Romero|Rubio|2000-01-02|F|estefany@gmail.com|77dt77|5577999900|5511220022|ROM3988JUU3|estefany|1|NULL|Benitez|144|155|16

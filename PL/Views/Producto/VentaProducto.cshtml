@@ -1,0 +1,91 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Productos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Administrador de Ventas </h5>
+      
+    </div>
+</div>
+
+    @* Encabezado *@
+     <div class="container">
+           <h3 class="text-black"> Filtrar por:  </h3>
+          
+           <div class="row">
+ 
+              @using (Html.BeginForm("GetAll", "VentaProducto", FormMethod.Post,new { enctype = "multipart/form-data" }))
+             {
+                 <div class="col-md-3">
+                   @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
+                 </div>
+                 <div class="col-md-3">
+                  @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+                 </div>
+                 <div class="col-md-3">
+                 <input type="submit" value="Buscar" class="btn btn-success" />
+                 </div>
+             }
+          </div>
+         @Html.ActionLink("Agregar +", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success" })
+     </div>
+     
+
+     <div class="row">
+        @foreach (ML.Producto producto in Model.Productos)
+          {
+             <div class="col mt-3 pt-3">
+                  <div class="card text-white bg-dark border-success  mb-3 border-4 " style="width: 18rem;">
+                     <img src="~/Imagen/SinProducto.jpg" class="card-img-top" style=" height:50%; width:100%;">
+                         <div class="card-body ">
+                         <h5 class="card-title card-header text-center bg-secondary" id="pNombre">@producto.Nombre</h5>
+                         <p class="card-text" id="pPrecioUnitario">Precio: @producto.PrecioUnitario</p>
+                         <p class="card-text" id="pStock">Stock: @producto.Stock</p>
+                     @*  <p class="card-text" id="pIdProveedor">Proveedor: @producto.Proveedor.IdProveedor</p>*@
+                         <p class="card-text" id="pProveedor">Proveedor: @producto.Proveedor.Nombre</p>
+                      @* <p class="card-text" id="pDepartamento>Departamento: @producto.Departamento.IdDepartamento</p>*@
+                         <p class="card-text" id="pDepartamento">Departamento: @producto.Departamento.Nombre</p>
+                      @* <p class="card-text" id="pIdArea">Area: @producto.Area.IdArea</p>*@
+                         <p class="card-text" id="pArea">Area: @producto.Area.Nombre</p>
+                         <p class="card-text" id="pDescripcion">Descripcion: @producto.Descripcion</p>
+                         </div>
+                  </div>
+             </div>
+           }
+     </div>
+
+@section Scripts
+{
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tblProducto').DataTable({
+            searching: false,
+            "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+            autoWidth: false,
+            columnDefs: [
+                {
+                    targets: ['_all'],
+                    className: 'mdc-data-table__cell',
+                },
+            ],
+            language: {
+                url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+            },
+         });
+    });
+
+
+
+</script>
+
+}

@@ -1,0 +1,273 @@
+﻿@model ML.Producto
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+  
+    <h2>Form</h2>
+    <div class="row">
+
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                <div class="form-horizontal">
+    
+                    @*<div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.IdProducto, new { @class = "hidden" })
+
+                            @Html.TextBoxFor(model => model.IdProducto, new { @class = "hidden form-control" })
+
+                            @Html.ValidationMessageFor(model => model.IdProducto)
+
+                        </div>
+
+                    </div>
+*@
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Nombre)
+                              <span class="input-group-text"><i class="bi bi-bag"></i></span>
+
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+
+                            @Html.ValidationMessageFor(model => model.Nombre)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.PrecioUnitario)
+                             <span class="input-group-text"><i class="bi bi-cash-coin"></i></span>
+
+                            @Html.TextBoxFor(model => model.PrecioUnitario, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.PrecioUnitario)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Stock)
+                              <span class="input-group-text"><i class="bi bi-box-seam-fill"></i></span>
+
+                            @Html.TextBoxFor(model => model.Stock, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Stock)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Proveedor.IdProveedor)
+
+                              <span class="input-group-text"><i class="bi bi-person-square"></i></span>
+
+                            @Html.TextBoxFor(model => model.Proveedor.IdProveedor, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Departamento.IdDepartamento)
+
+                              <span class="input-group-text"><i class="bi bi-pin-map"></i></span>
+
+                            @Html.TextBoxFor(model => model.Departamento.IdDepartamento, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Descripcion)
+                           <span class="input-group-text"><i class="bi bi-file-text"></i></span>
+
+                            @Html.TextBoxFor(model => model.Descripcion, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Descripcion)
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                       
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Area.IdArea)
+
+                              <span class="input-group-text"><i class="bi bi-pin-map"></i></span>
+
+                            @Html.TextBoxFor(model => model.Area.IdArea, new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Area.IdArea)
+
+                        </div>
+
+                    </div>
+ 
+                    <div class=" offset-md-12">
+
+                            @Html.LabelFor(model=> model.Imagen)
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+                                <input id="IFImage" type='file' class="form-control" name="IFImage" onchange="validateFile(this), readURL(this);  " />
+                            </div>
+
+                            @if (Model.Imagen != null)
+                            {
+
+                                <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:250px ; height:250px" />
+
+                            }
+                            else
+                            {
+                                <img id="Img" src="~/Imagen/SinProducto.jpg" style="width:250px ; height:250px" />
+                            }
+                        </div>
+                        @Html.HiddenFor(model => model.Imagen)
+
+
+                    <div class="form-group">
+
+                       @* <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Proveedor.IdProveedor)
+
+
+                            @Html.DropDownListFor(model => model.Proveedor.IdProveedor, new SelectList(Model.Proveedor.Proveedores, "IdProveedor", "Nombre"), "Selecciona un Proveedor", new { @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Proveedor.IdProveedor)
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.Departamento.IdDepartamento)
+
+                            @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Selecciona una opcion", new { id = "ddlDepartamento", @class = "form-control" })
+
+                            @Html.ValidationMessageFor(model => model.Departamento.IdDepartamento)
+
+                        </div>      *@      
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                            @Html.ActionLink("Regresar", "GetAll", "Producto", htmlAttributes: new { @class = "btn btn-danger" })
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts
+{
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#ddlDepartamento").change(function () {
+                    $("#ddlArea").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("GetArea")',
+                        dataType: 'json',
+                        data: { IdDepartamento: $("#ddlDepartamento").val() },
+                        success: function (areas) {
+                            $("#ddlEstado").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                            $.each(areas, function (i, areas) {
+                                $("#ddlEstado").append('<option value="'
+                                    + areas.idArea + '">'
+                                    + areas.nombre + '</option>');
+                            });
+                        },
+                        error: function (ex) {
+                            alert('Failed.' + ex);
+                        }
+                    });
+                })
+            })
+
+             $(document).ready(function () {
+                $("#ddlDepartamento").change(function () {
+                    $("#ddlArea").empty();
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("GetArea")',
+                        dataType: 'json',
+                        data: { IdDepartamento: $("#ddlDepartamento").val() },
+                        success: function (areas) {
+                            $("#ddlEstado").append('<option value="0">' + 'Seleccione una opción' + '</option>');
+                            $.each(areas, function (i, areas) {
+                                $("#ddlEstado").append('<option value="'
+                                    + areas.idArea + '">'
+                                    + areas.nombre + '</option>');
+                            });
+                        },
+                        error: function (ex) {
+                            alert('Failed.' + ex);
+                        }
+                    });
+                })
+            })
+
+                  function validateFile()
+                {
+                    var allowedExtension = ['jpeg', 'jpg'];
+                    var fileExtension = document.getElementById('IFImage').value.split('.').pop().toLowerCase();
+                    var isValidFile = false;
+                        for(var index in allowedExtension) {
+                            if(fileExtension === allowedExtension[index]) {
+                                isValidFile = true;
+                                break;
+                            }
+                        }
+                        if(!isValidFile) {
+                            alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+                            document.getElementById('IFImage').value = ""
+                        }
+                        return isValidFile;
+                }
+</script>
+}

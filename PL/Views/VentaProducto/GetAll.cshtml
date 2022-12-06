@@ -1,0 +1,95 @@
+﻿@model ML.Producto
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Venta de Productos</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Seleccione un producto para agregar al carrito </h5>
+      
+    </div>
+</div>
+
+    @* Encabezado *@
+     <div class="container">
+           <h3 class="text-black"> Buscar por:  </h3>
+          
+           <div class="row">
+ 
+              @using (Html.BeginForm("GetAll", "VentaProducto", FormMethod.Post,new { enctype = "multipart/form-data" }))
+             {
+                 <div class="col-md-3">
+                   @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.Departamentos, "IdDepartamento", "Nombre"), "Departamentos", new { @class = "form-control" })
+                 </div>
+                 <div class="col-md-3">
+                  @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+                 </div>
+                 <div class="col-md-3">
+                 <input type="submit" value="Buscar" class="btn btn-success" />
+                 </div>
+             }
+          </div>
+       @*  @Html.ActionLink("Agregar +", "Form", "Producto", htmlAttributes: new { @class = "btn btn-success" })*@
+     </div>
+     
+
+     <div class="row">
+        @foreach (ML.Producto producto in Model.Productos)
+          {
+             <div class="col mt-3 pt-3">
+                  <div class="card text-white bg-dark border-success  mb-3 border-4 " style="width: 18rem;">
+                     <img src="~/Imagen/SinProducto.jpg" class="card-img-top" style=" height:50%; width:100%;">
+                         <div class="card-body ">
+                         <h5 class="card-title card-header text-center bg-secondary" id="pNombre">@producto.Nombre</h5>
+                         <p class="card-text" id="pPrecioUnitario">PrecioUnitario: @producto.PrecioUnitario</p>
+                         <p class="card-text" id="pStock">Stock: @producto.Stock</p>
+                     @*  <p class="card-text" id="pIdProveedor">Proveedor: @producto.Proveedor.IdProveedor</p>*@
+                       @*  <p class="card-text" id="pProveedor">Proveedor: @producto.Proveedor.Nombre</p>*@
+                      @* <p class="card-text" id="pDepartamento>Departamento: @producto.Departamento.IdDepartamento</p>*@
+                      @*   <p class="card-text" id="pDepartamento">Departamento: @producto.Departamento.Nombre</p>*@
+                      @* <p class="card-text" id="pIdArea">Area: @producto.Area.IdArea</p>*@
+  @*                       <p class="card-text" id="pArea">Area: @producto.Area.Nombre</p>*@
+                         <p class="card-text" id="pDescripcion">Descripcion: @producto.Descripcion</p>
+                            <a href="@Url.Action("CartPost", "VentaProducto", new { IdProducto = producto.IdProducto, Nombre = producto.Nombre, PrecioUnitario = producto.PrecioUnitario, Stock = producto.Stock})" class="btn btn-success">Añadir <i class="bi bi-cart3" style="color: khaki"></i> </a>
+                         </div>
+                  </div>
+             </div>
+           }
+     </div>
+
+@section Scripts
+{
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
+<script type="text/javascript">
+    function CrearObjeto() {
+    var materia = {
+        IdProducto: $('#pIdProducto').val(),
+        PrecioUnitario: $('#pPrecioUnitario').val(),
+        Nombre: $('#pNombre').val(),
+        Stock: $('#pStock').val(),
+        Departamento: {
+            IdDepartamento: $('#pIdDepartamento').val()
+        }
+    }
+    Add(producto)
+}
+    function Add(producto) {
+    $.ajax({
+        type: 'GET',
+        url: '@Url.Action("CartPost")',
+        dataType: 'json',
+        data: JSON.stringify(producto),
+        contentType: 'application/json; charset=utf-8',
+        success: function (result) {
+            $('#myModal').modal();
+            $('#ModalUpdate').modal('hide');
+            GetAll();
+        }
+    });
+};
+</script>
+}
